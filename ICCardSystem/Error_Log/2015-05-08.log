@@ -1,0 +1,149 @@
+***********************************************************************
+记录时间：2015-05-08 13:33:36
+错误信息：用户 'sa' 登录失败。
+跟踪记录：
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   在 System.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   在 System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   在 System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   在 System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   在 System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   在 System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   在 System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   在 System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.Open()
+   在 System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<>c__DisplayClass1.<Execute>b__0()
+   在 System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   在 System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute(Action operation)
+   在 System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+***********************************************************************
+记录时间：2015-05-08 13:40:54
+错误信息：对一个或多个实体的验证失败。有关详细信息，请参阅“EntityValidationErrors”属性。
+跟踪记录：
+   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 ICCardSystem.Utility.DALBase.SaveAllChanges() 位置 g:\ICCardSystem\ICCardSystem\Utility\DALBase.cs:行号 109
+***********************************************************************
+记录时间：2015-05-08 13:41:02
+错误信息：对一个或多个实体的验证失败。有关详细信息，请参阅“EntityValidationErrors”属性。
+跟踪记录：
+   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 ICCardSystem.Utility.DALBase.SaveAllChanges() 位置 g:\ICCardSystem\ICCardSystem\Utility\DALBase.cs:行号 109
+***********************************************************************
+记录时间：2015-05-08 13:46:00
+错误信息：对一个或多个实体的验证失败。有关详细信息，请参阅“EntityValidationErrors”属性。
+跟踪记录：
+   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 ICCardSystem.Utility.DALBase.SaveAllChanges() 位置 g:\ICCardSystem\ICCardSystem\Utility\DALBase.cs:行号 109
+***********************************************************************
+记录时间：2015-05-08 13:46:08
+错误信息：对一个或多个实体的验证失败。有关详细信息，请参阅“EntityValidationErrors”属性。
+跟踪记录：
+   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 ICCardSystem.Utility.DALBase.SaveAllChanges() 位置 g:\ICCardSystem\ICCardSystem\Utility\DALBase.cs:行号 109
+***********************************************************************
+记录时间：2015-05-08 13:46:22
+错误信息：对一个或多个实体的验证失败。有关详细信息，请参阅“EntityValidationErrors”属性。
+跟踪记录：
+   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 ICCardSystem.Utility.DALBase.SaveAllChanges() 位置 g:\ICCardSystem\ICCardSystem\Utility\DALBase.cs:行号 109
+***********************************************************************
+记录时间：2015-05-08 14:05:18
+错误信息：对一个或多个实体的验证失败。有关详细信息，请参阅“EntityValidationErrors”属性。
+跟踪记录：
+   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 ICCardSystem.Utility.DALBase.SaveAllChanges() 位置 g:\ICCardSystem\ICCardSystem\Utility\DALBase.cs:行号 109
+***********************************************************************
+记录时间：2015-05-08 14:31:30
+错误信息：对一个或多个实体的验证失败。有关详细信息，请参阅“EntityValidationErrors”属性。
+跟踪记录：
+   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 ICCardSystem.Utility.DALBase.SaveAllChanges() 位置 g:\ICCardSystem\ICCardSystem\Utility\DALBase.cs:行号 109
+***********************************************************************
+记录时间：2015-05-08 14:44:28
+错误信息：对一个或多个实体的验证失败。有关详细信息，请参阅“EntityValidationErrors”属性。
+跟踪记录：
+   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 ICCardSystem.Utility.DALBase.SaveAllChanges() 位置 g:\ICCardSystem\ICCardSystem\Utility\DALBase.cs:行号 109
+***********************************************************************
+记录时间：2015-05-08 15:17:38
+错误信息：对一个或多个实体的验证失败。有关详细信息，请参阅“EntityValidationErrors”属性。
+跟踪记录：
+   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 ICCardSystem.Utility.DALBase.SaveAllChanges() 位置 g:\ICCardSystem\ICCardSystem\Utility\DALBase.cs:行号 109
+***********************************************************************
+记录时间：2015-05-08 16:42:16
+错误信息：对一个或多个实体的验证失败。有关详细信息，请参阅“EntityValidationErrors”属性。
+跟踪记录：
+   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 ICCardSystem.Utility.DALBase.SaveAllChanges() 位置 g:\ICCardSystem\ICCardSystem\Utility\DALBase.cs:行号 109
+***********************************************************************
+记录时间：2015-05-08 16:44:43
+错误信息：对一个或多个实体的验证失败。有关详细信息，请参阅“EntityValidationErrors”属性。
+跟踪记录：
+   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 ICCardSystem.Utility.DALBase.SaveAllChanges() 位置 g:\ICCardSystem\ICCardSystem\Utility\DALBase.cs:行号 109
+***********************************************************************
+记录时间：2015-05-08 20:06:07
+错误信息：对一个或多个实体的验证失败。有关详细信息，请参阅“EntityValidationErrors”属性。
+跟踪记录：
+   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 ICCardSystem.Utility.DALBase.SaveAllChanges() 位置 g:\ICCardSystem\ICCardSystem\Utility\DALBase.cs:行号 109
+***********************************************************************
+记录时间：2015-05-08 20:10:52
+错误信息：对一个或多个实体的验证失败。有关详细信息，请参阅“EntityValidationErrors”属性。
+跟踪记录：
+   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 ICCardSystem.Utility.DALBase.SaveAllChanges() 位置 g:\ICCardSystem\ICCardSystem\Utility\DALBase.cs:行号 109
+***********************************************************************
+记录时间：2015-05-08 21:41:33
+错误信息：对一个或多个实体的验证失败。有关详细信息，请参阅“EntityValidationErrors”属性。
+跟踪记录：
+   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 ICCardSystem.Utility.DALBase.SaveAllChanges() 位置 g:\ICCardSystem\ICCardSystem\Utility\DALBase.cs:行号 109
+***********************************************************************
+记录时间：2015-05-08 21:58:39
+错误信息：对一个或多个实体的验证失败。有关详细信息，请参阅“EntityValidationErrors”属性。
+跟踪记录：
+   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 ICCardSystem.Utility.DALBase.SaveAllChanges() 位置 g:\ICCardSystem\ICCardSystem\Utility\DALBase.cs:行号 109

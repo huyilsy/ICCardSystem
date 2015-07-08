@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "BinManagement";
+}
+
+<html>
+<head>    
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <script src="~/Scripts/vlave.js"></script>
+    <script src="~/lib/ligerUI/js/core/base.js"></script>
+    <script src="~/lib/ligerUI/js/plugins/ligerGrid.js"></script>
+    <style type="text/css">
+        #mainContainer2 {
+            width: 1200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="mainContainer1">
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">站箱号</label>
+            <div class="col-sm-4">
+                <input class="form-control" id="zxh" name="FStoreBatchId">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">站箱名称</label>
+            <div class="col-sm-4">
+                <input class="form-control" id="zxmc" name="FStoreBatchId">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-6">
+                <input type="button" class="btn btn-default" id="submitBtn1" value="增加站箱" />
+            </div>
+        </div>        
+    </div>
+
+    <div id="mainContainer2">
+        
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-6">
+                <input type="button" class="btn btn-default" id="submitBtn2" value="查找站箱" />
+            </div>
+        </div>
+    </div>
+
+    <div id="result" style="height:300px">
+        <div id="maingrid" style=" margin-top:30px;  margin-left: 20px; margin-right: 20px; "></div>
+    </div>
+
+    <script type="text/javascript">
+        $('#submitBtn').click(function () {
+            var manager, g;
+            function f_initGrid() {
+                g = manager = $("#maingrid").ligerGrid({
+                    columns: [
+                        { display: '站箱号', name: 'zxh' },
+                        { display: '站箱名称', name: 'zxmc' },
+                        { display: '操作', isSort: false, width: 100, render: function (rowdata, rowindex, value) {
+                                var h = "";
+
+                                if (!rowdata._editing) {
+                                    h += "<a href='javascript:beginEdit(" + rowindex + ")'>修改</a> ";
+                                    h += "<a href='javascript:deleteRow(" + rowindex + ")'>销户</a> ";
+                                }
+                                else {
+                                    h += "<a href='javascript:endEdit(" + rowindex + ")'>提交</a> ";
+                                    h += "<a href='javascript:cancelEdit(" + rowindex + ")'>取消</a> ";
+                                }
+                                return h;
+                            },
+                        }                
+                    ],
+                    width: '100%',
+                    data: gridData
+                });
+            };
+        });
+    </script>
+</body>
+</html>
+
+

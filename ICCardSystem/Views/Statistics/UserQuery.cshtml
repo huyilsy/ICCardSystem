@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "UserQuery";
+}
+
+<html>
+<head>
+    <title></title>
+    <link href="~/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <script src="~/lib/ligerUI/js/core/base.js"></script>
+    <script src="~/lib/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
+    <script src="~/lib/ligerUI/js/plugins/ligerCheckBox.js"></script>
+    <script src="~/lib/ligerUI/js/plugins/ligerResizable.js"></script>
+    <script src="~/lib/ligerUI/js/plugins/ligerComboBox.js"></script>
+    <script src="~/lib/ligerUI/js/plugins/ligerGrid.js"></script>
+    <script src="~/lib/ligerUI/js/plugins/ligerForm.js"></script>
+    <script src="~/lib/ligerUI/js/ligerui.all.js"></script>
+</head>
+
+<body>   
+    <div id="condition" style="margin-top: 10px;">
+        <label style="float:left;margin-left:10px;">查询条件:</label>
+        <select id="QueryCondition" style="float: left; margin-left: 10px;">
+            <option id="kpbh" value="kpbh">卡片编号</option>
+            <option id="hm" value="hm">用户姓名</option>
+            <option id="zz" value="zz">用户住址</option>
+            <option id="tel" value="tel">用户电话</option>
+        </select>
+        <input id="Condition" name="Condition" type="text" style="margin-left: 10px; float: left; width: 200px;" required />
+        <input id="cx" name="cx" type="button" value="查询" style="width:100px" />
+    </div>
+
+    <div id="result" style="height:300px">
+        <div id="maingrid" style=" margin-top:30px;  margin-left: 20px; margin-right: 20px; "></div>
+    </div>
+   
+           
+    <script type="text/javascript">
+
+        $('#cx').click(function () {
+            var condition=$("#Condition").val();
+            var postData = {};
+            postData={Condition:condition};
+            switch ($("#QueryCondition").val())
+            {
+                 case "kpbh":
+                     $.post("../Statistics/KHQuery", postData, getUserCallBack);
+                    break;
+                case "hm":
+                    $.post("../Statistics/HMQuery", postData, getUserCallBack);
+                    break;
+                case "zz":
+                    $.post("../Statistics/ZZQuery", postData, getUserCallBack);
+                    break;
+                case "tel":
+                    $.post("../Statistics/TELQuery", postData, getUserCallBack);
+                    break;
+                }
+        })
+        var gridData = {};
+        function getUserCallBack(data) {
+            gridData.Rows = data;
+            gridData.Total = data.length;
+            f_initGrid();
+        }
+        var manager, g;
+        function f_initGrid() {
+            g = manager = $("#maingrid").ligerGrid({
+                columns: [
+                   { display: '卡片编号', name: 'kpbh' },
+                   { display: '用户名称', name: 'hm', width: 100, editor: { type: 'text' } },
+                   { display: '用户类型', name: 'yhlx' },
+                   { display: '用户电话', name: 'tel', editor: { type: 'text' } },
+                   { display: '用户地址', name: 'zz', width: 300 },
+                    {
+                        display: '操作', isSort: false, width: 100, render: function (rowdata, rowindex, value) {
+
+                            var h = "";
+
+                            if (!rowdata._editing) {
+                                h += "<a href='javascript:beginEdit(" + rowindex + ")'>修改</a> ";                               
+                                h += "<a href='javascript:deleteRow(" + rowindex + ")'>销户</a> ";
+                            }
+                            else {
+                                h += "<a href='javascript:endEdit(" + rowindex + ")'>提交</a> ";
+                                h += "<a href='javascript:cancelEdit(" + rowindex + ")'>取消</a> ";
+                            }
+
+                            return h;
+                        }
+                    }
+                ],
+                enabledEdit: true,
+                clickToEdit: false,
+                width: '100%',
+                data: gridData
+            });
+        }
+
+        //修改
+        function beginEdit(rowid) {
+            manager.beginEdit(rowid);
+        }       
+        //取消
+        function cancelEdit(rowid) {
+            manager.cancelEdit(rowid);
+        }
+        //提交
+        function endEdit(rowid) {
+            manager.endEdit(rowid);
+            updateEdit(rowid);
+        }
+        //销户，即删除
+        function deleteRow(rowid) {
+            if (confirm('确定删除?')) {
+                deleteEdit(rowid);
+                manager.deleteRow(rowid);                
+            }
+        }
+
+        function updateEdit(rowindex) {
+           var row = manager.getRow(rowindex);
+           var hm = row.hm;
+           var tel =row.tel;
+           var kpbh = row.kpbh;
+           var zz = row.zz;
+           var postData2 = [];
+           postData2 = {
+               Condition1: hm,
+               Condition2: tel,
+               Condition3: kpbh,             
+           }
+           $.post("../Statistics/UpdateNewUser", postData2, updateUserCallBack);
+
+        }
+
+        function deleteEdit(rowindex) {
+            var row = manager.getRow(rowindex);
+            var kpbh = row.kpbh;
+            var postData2 = [];
+            postData3 = {
+                Condition1: kpbh,              
+            }
+            $.post("../Statistics/deleteEdit", postData3);
+
+        }
+              
+        var yhbhNum;
+        function updateUserCallBack(data) {
+            yhbhNum = data;
+            $.ligerDialog.success("修改用户资料成功");
+        }
+
+      
+    </script>
+
+</body>
+</html>

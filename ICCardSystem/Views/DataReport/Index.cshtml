@@ -1,0 +1,155 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="~/lib/ligerUI/js/plugins/ligerGrid.js"></script>
+    <script src="~/Scripts/jquery.PrintArea.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        #mainContainer2 {
+            width: 1200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="mainContainer2">
+        <div id="wl">
+            <form class="form-horizontal" role="form" id="fomr1">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">月报类型</label>
+                    <div class="col-sm-4">
+                        <select id="FOperator" class="form-control">
+                            <option value="business">营业月报</option>
+                            <option value="fill">建档月报</option>
+                            <option value="industry">工商月报</option>
+                        </select>
+                    </div>
+
+                    @* <label for="inputEmail3" class="col-sm-2 control-label">操作员</label>
+                        <div class="col-sm-4">
+                            <select id="FOperator" class="form-control setting">
+                                @foreach (var item in ViewBag.userList)
+                                {
+                                    <option value="@item.Name">@item.Name</option>
+                                }
+                            </select>
+                        </div>*@
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">起始日期</label>
+                    <div class="col-sm-4">
+                        <input class="form-control setting" id="FSDate" name="FSDate">
+                    </div>
+
+                    <label for="inputEmail3" class="col-sm-2 control-label">终止日期</label>
+                    <div class="col-sm-4">
+                        <input class="form-control setting" id="FEDate" name="FEDate">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-6">
+                        <input type="button" class="btn btn-default" id="submitBtn" value="统计" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="myPrintArea">
+        <div id="result">
+            <div id="maingrid" style=" margin-top:30px;  margin-left: 20px; margin-right: 20px; "></div>
+        </div>
+        <div>
+            <label>总购气量</label>
+            <input id="ql">
+        </div>
+    </div>
+    <button id="btnPrint" type="button">打 印</button>
+    <script>
+        $('#FSDate').datepicker({
+            weekStart: 7,
+            format: 'yyyy-mm-dd',
+            language: 'zh-CN',
+        });
+
+        $('#FEDate').datepicker({
+            weekStart: 7,
+            format: 'yyyy-mm-dd',
+            language: 'zh-CN',
+        });
+
+        $(function () {
+            $("#btnPrint").bind("click", function (event) {
+                $("#myPrintArea").printArea();
+            });
+
+            $('#submitBtn').click(function () {
+                var fSDate = $('#FSDate').val();
+                if (fSDate == "") {
+                    $('#FSDate').focus().select();
+                    return;
+                }
+                var fEDate = $('#FEDate').val();
+                if (fEDate == "") {
+                    $('#FEDate').focus().select();
+                    return;
+                }
+                if (fEDate < fSDate) {
+                    $('#FEDate').focus().select();
+                    return;
+                }
+
+
+                var fOperator = $('#FOperator option:selected').val();
+                var postData = {
+                    FOperator: fOperator,
+                    FSDate: fSDate,
+                    FEDate: fEDate
+                };
+                $.post("../DataReport/BusinessStatistics", postData, statisticsCallBack);
+            });
+
+        });
+
+        //   function statisticsCallBack(data) {
+        //      var url = data;
+        //       $("#mainContainer").load(url);
+        //     }
+
+        var gridData = {};
+        var sum = 0;
+        function statisticsCallBack(data) {
+            sum = 0;
+            gridData.Rows = data;
+            gridData.Total = data.length;
+            for (var i = 0; i < data.length; i++) {
+                sum += data[i].skql;
+            }
+            f_initGrid();
+            document.getElementById('ql').value = sum;
+        }
+        var manager, g;
+        function f_initGrid() {
+            g = manager = $("#maingrid").ligerGrid({
+                columns: [
+                    { display: '用户编号', name: 'ywbh', width: 100 },
+                    { display: '购气量', name: 'skql' },
+                     { display: '购气金额', name: 'skje' },
+                     { display: '购气日期', type: 'date', format: 'yyyy年MM月dd', name: 'skrq' },
+                     { display: '该笔操作的人员代号', name: 'czy' },
+                ],
+                width: '100%',
+                data: gridData
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+

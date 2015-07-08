@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    <title></title>
+    <link href="~/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <script src="~/lib/ligerUI/js/core/base.js"></script>
+    <script src="~/lib/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
+    <script src="~/lib/ligerUI/js/plugins/ligerCheckBox.js"></script>
+    <script src="~/lib/ligerUI/js/plugins/ligerResizable.js"></script>
+    <script src="~/lib/ligerUI/js/plugins/ligerComboBox.js"></script>
+    <script src="~/lib/ligerUI/js/plugins/ligerGrid.js"></script>
+    <script src="~/lib/ligerUI/js/plugins/ligerForm.js"></script>
+    <script src="~/lib/ligerUI/js/ligerui.all.js"></script>
+
+</head>
+<body>
+<h2>Index</h2>
+<p>@ViewBag.com</p>
+<p>软件编号：@ViewBag.SoftVer</p>
+<p>硬件编号：@ViewBag.HardVer</p>
+
+    <div>
+    <input type="button" value="连接" id="connect" style="width:70px" />
+    <input type="button" value="断开连接" id="Disconnect" style="width:70px" />
+    <input type="text" id="l" style="width:220px" />
+    <br />
+  <div id="ver" hidden>
+<input type="button" value="读数据" id="readData" style="width:70px" />
+    <input type="text" id="data" style="width:220px" />
+    <br/>
+<input type="button" value="写数据" id="writeData" style="width:70px" />
+      <input type="text" id="WUserId" style="width:220px" />
+      <input type="text" id="WRemainQL" style="width:220px" />
+      <input type="text" id="WDQBH" style="width:220px" />
+      <input type="text" id="W" style="width:220px" />
+    <br/>
+      </div>
+<input type="button" value="密码验证" id="verifyData" style="width:70px" />
+    <input type="text" id="Vdata" style="width:220px" />
+    <input type="text" id="V" style="width:220px" />
+</div>
+
+    <div id="r" hidden>
+       用户类型： <input type="text" id="UserType" style="width:220px" />
+       用户编号： <input type="text" id="UserId" style="width:220px" />
+       剩余气量： <input type="text" id="RemainQL" style="width:220px" />
+       地    区： <input type="text" id="DQBH" style="width:220px" />
+    </div>
+
+        <script type="text/javascript">
+            //   $(function () {
+            //     $("#ver").hide();
+
+            // })
+
+            $('#connect').click(function () {
+
+                $.post("../ReadCard/Connect", getDataCallBack);
+            })
+            $('#Disconnect').click(function () {
+
+                $.post("../ReadCard/Disconnect", getDataCallBack);
+            })
+
+            $('#readData').click(function () {
+
+                $.post("../ReadCard/ReadData",readCallBack);
+            })
+
+            $('#writeData').click(function () {
+                var postData = {};
+                var userId = $("#WUserId").val();
+                var remainQL = $("#WRemainQL").val();
+                var dqbh = $("#WDQBH").val();
+                postData = {
+                    UserId: userId,
+                    RemainQL: remainQL,
+                    DQBH:dqbh
+                };
+                $.post("../ReadCard/WriteData", postData, writeCallBack);
+            })
+
+
+            $('#verifyData').click(function () {
+                var postData = {};
+                var condition1 = $("#Vdata").val();
+                postData = {
+                    Condition1: condition1
+                };
+                $.post("../ReadCard/VerifyData", postData, verifyCallBack);
+
+            })
+        
+            function getDataCallBack(data) {
+
+                document.getElementById("l").value = data;
+            }
+          
+            function readCallBack(data) {
+
+                document.getElementById("data").value = data.UserId;
+                document.getElementById("UserType").value = data.UserType;
+                document.getElementById("UserId").value = data.UserId;
+                document.getElementById("RemainQL").value = data.RemainQL;
+                document.getElementById("DQBH").value = data.DQBH;
+                $("#r").show();
+            }
+
+            function writeCallBack(data) {
+                document.getElementById("W").value = data;
+            }
+
+            function verifyCallBack(data) {
+                document.getElementById("V").value = data;
+                if (data == "密码校验成功！") {
+                    $("#ver").show();
+                }
+            }         
+
+        </script>
+
+</body>
+
+ 

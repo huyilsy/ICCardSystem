@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "UploadFiles";
+}
+
+<h2>UploadFiles</h2>
+
+
+
+
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <h2>UploadFiles</h2>
+    <% using (Html.BeginForm("UploadFiles", "Files", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {%>
+    <input type="file" name="FileUpload1" /><br />
+    <input type="submit" value="Upload" />
+    <% }%>
+</asp:Content>
